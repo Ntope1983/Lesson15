@@ -1,0 +1,26 @@
+[
+  {
+    "fullname": "adad",
+    "username": "adada",
+    "password": "2213212121312",
+    "role": "user"
+  },
+  {
+    "fullname": "sddsad",
+    "username": "dadas",
+    "password": "213131331232",
+    "role": "admin"
+  },
+  {
+    "fullname": "GiannisPolidoras",
+    "username": "dope1983",
+    "password": "Pol123!@#",
+    "role": "user"
+  },
+  {
+    "fullname": "test",
+    "username": "test",
+    "password": "testtest",
+    "role": "admin"
+  }
+]
