@@ -69,16 +69,20 @@ def switch_player(turn_to_play):  # turn player
         return player1
 
 
-def check_2from3(computer_tuple):
-    x = set()
-    for row in range(3):
-        for column in range(3):
-            if computer_tuple[0]== row or computer_tuple[1]
+def computer_play(difficulty):
+    set_of_wins = [[{(0,0):board[0][0]}, {(0,1),board[0][1]}, board[0][2]],
+                   [board[1][0], board[1][1], board[1][2]],
+                   [board[2][0], board[2][1], board[2][2]],
+                   [board[0][0], board[1][1], board[2][2]],
+                   [board[0][2], board[1][1], board[2][0]],
+                   [board[0][0], board[1][0], board[2][0]],
+                   [board[0][1], board[1][1], board[2][1]],
+                   [board[0][2], board[1][2], board[2][2]]]
 
+    if difficulty:
+        for set in set_of_wins:
+            if set.count("X")==2 and set.count(" ")==1:
 
-def computer_play(level):
-    if level:
-        pass
     else:
         random_choice = random.choice(list(available_positions))
         available_positions.remove(random_choice)
@@ -102,6 +106,4 @@ def main():
         turn_player = switch_player(turn_player)
         print("Ισοπαλία")
 
-
 # main()
-check_2from3()
