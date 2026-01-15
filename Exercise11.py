@@ -70,24 +70,85 @@ def switch_player(turn_to_play):  # turn player
 
 
 def computer_play(difficulty):
-    set_of_wins = [[{(0,0):board[0][0]}, {(0,1),board[0][1]}, board[0][2]],
-                   [board[1][0], board[1][1], board[1][2]],
-                   [board[2][0], board[2][1], board[2][2]],
-                   [board[0][0], board[1][1], board[2][2]],
-                   [board[0][2], board[1][1], board[2][0]],
-                   [board[0][0], board[1][0], board[2][0]],
-                   [board[0][1], board[1][1], board[2][1]],
-                   [board[0][2], board[1][2], board[2][2]]]
-
     if difficulty:
-        for set in set_of_wins:
-            if set.count("X")==2 and set.count(" ")==1:
-
+        if board[0][0] == " " and board[0][1] == "X" and board[0][2] == "X":  # for (0,0)(0,1)(0,2)  all combinations
+            board[0][0] = "O"
+            choice = (0, 0)
+        if board[0][0] == "X" and board[0][1] == " " and board[0][2] == "X":
+            board[0][1] = "O"
+            choice = (0, 1)
+        if board[0][0] == "X" and board[0][1] == "X" and board[0][2] == " ":
+            board[0][2] = "O"
+            choice = (0, 2)
+        if board[0][0] == " " and board[1][0] == "X" and board[2][0] == "X":  # for (0,0)(1,0)(2,0)  all combinations
+            board[0][0] = "O"
+            choice = (0, 0)
+        if board[0][0] == "X" and board[1][0] == " " and board[2][0] == "X":
+            board[1][0] = "O"
+            choice = (1, 0)
+        if board[0][0] == "X" and board[1][0] == "X" and board[2][0] == " ":
+            board[2][0] = "O"
+            choice = (2, 0)
+        if board[0][0] == " " and board[1][1] == "X" and board[2][2] == "X":  # for (0,0)(1,1)(2,2)  all combinations
+            board[0][0] = "O"
+            choice = (0, 0)
+        if board[0][0] == "X" and board[1][1] == " " and board[2][2] == "X":
+            board[1][1] = "O"
+            choice = (1, 1)
+        if board[0][0] == "X" and board[1][1] == "X" and board[2][2] == " ":
+            board[2][2] = "O"
+            choice = (2, 2)
+        if board[1][0] == " " and board[1][1] == "X" and board[1][2] == "X":  # for (1,0)(1,1)(1,2)  all combinations
+            board[1][0] = "O"
+            choice = (1, 0)
+        if board[1][0] == "X" and board[1][1] == " " and board[1][2] == "X":
+            board[1][1] = "O"
+            choice = (1, 1)
+        if board[1][0] == "X" and board[1][1] == "X" and board[1][2] == " ":
+            board[1][2] = "O"
+            choice = (1, 2)
+        if board[2][0] == "X" and board[2][1] == " " and board[2][2] == "X":  # for (2,0)(2,1)(2,2)  all combinations
+            board[2][1] = "O"
+            choice = (2, 1)
+        if board[2][0] == " " and board[2][1] == "X" and board[2][2] == "X":
+            board[2][0] = "O"
+            choice = (2, 0)
+        if board[2][0] == "X" and board[2][1] == "X" and board[2][2] == " ":
+            board[2][2] = "O"
+            choice = (2, 2)
+        if board[0][1] == "X" and board[1][1] == " " and board[2][1] == "X":  # for (0,1)(1,1)(2,1)  all combinations
+            board[1][1] = "O"
+            choice = (1, 1)
+        if board[0][1] == " " and board[1][1] == "X" and board[2][1] == "X":
+            board[0][1] = "O"
+            choice = (0, 1)
+        if board[0][1] == "X" and board[1][1] == "X" and board[2][1] == " ":
+            board[2][1] = "O"
+            choice = (2, 1)
+        if board[2][0] == "X" and board[1][1] == " " and board[0][2] == "X":  # for (2,0)(1,1)(0,2)  all combinations
+            board[1][1] = "O"
+            choice = (1, 1)
+        if board[2][0] == " " and board[1][1] == "X" and board[0][2] == "X":
+            board[2][0] = "O"
+            choice = (2, 0)
+        if board[2][0] == "X" and board[1][1] == "X" and board[0][2] == " ":
+            board[0][2] = "O"
+            choice = (0, 2)
+        if board[0][2] == "X" and board[1][2] == " " and board[2][2] == "X":  # for (0,2)(1,2)(2,2)  all combinations
+            board[1][2] = "O"
+            choice = (1, 2)
+        if board[0][2] == " " and board[1][2] == "X" and board[2][2] == "X":
+            board[0][2] = "O"
+            choice = (0, 2)
+        if board[0][2] == "X" and board[1][2] == "X" and board[2][2] == " ":
+            board[2][2] = "O"
+            choice = (2, 2)
+        else:
+           choice=random.choice(list(available_positions))
     else:
-        random_choice = random.choice(list(available_positions))
-        available_positions.remove(random_choice)
-        board[random_choice[0]][random_choice[1]] = "O"
-
+        choice=random.choice(list(available_positions))
+        board[choice[0]][choice[1]]="O"
+    available_positions.remove(choice)
 
 def main():
     turn_player = player1
@@ -104,6 +165,7 @@ def main():
             print(f"Συγχαρητήρια κέρδισε ο παίχτης :{turn_player}")
             break
         turn_player = switch_player(turn_player)
-        print("Ισοπαλία")
+    print("Ισοπαλία")
 
-# main()
+
+main()
