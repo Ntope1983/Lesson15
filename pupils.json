@@ -1,0 +1,47 @@
+[
+  {
+    "name": "john",
+    "Surname": "Polydoras",
+    "FatherName": "Konstantinos",
+    "Age": 42,
+    "Class": 1,
+    "idCard": 1038942,
+    "id": 1000
+  },
+  {
+    "name": "Maria",
+    "Surname": "Papadopoulou",
+    "FatherName": "Georgios",
+    "Age": 21,
+    "Class": 1,
+    "idCard": 2038451,
+    "id": 1001
+  },
+  {
+    "name": "Nikos",
+    "Surname": "Dimitriou",
+    "FatherName": "Alexandros",
+    "Age": 22,
+    "Class": 2,
+    "idCard": 2038452,
+    "id": 1002
+  },
+  {
+    "name": "Giannis",
+    "Surname": "Papadopoulos",
+    "FatherName": "Vasilis",
+    "Age": 24,
+    "Class": 5,
+    "idCard": 2035456,
+    "id": 1003
+  },
+  {
+    "name": "Georgios",
+    "Surname": "Papadopoulos",
+    "FatherName": "Ioannis",
+    "Age": 45,
+    "Class": 3,
+    "idCard": 2325452,
+    "id": 1004
+  }
+]

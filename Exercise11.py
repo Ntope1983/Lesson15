@@ -10,7 +10,6 @@ board = [
     [" ", " ", " "],
     [" ", " ", " "]
 ]
-
 available_positions = {(x, y) for x in range(3) for y in range(3)}
 
 
@@ -131,21 +130,27 @@ def check_tic_tac(player):
     return choice
 
 
-def computer_play(difficulty):
+def computer_play(difficulty, player):
     corners_avail_positions = available_positions.intersection({(0, 0), (0, 2), (2, 0), (2, 2)})
     center_avail_positions = available_positions - corners_avail_positions
+    opposite = "X"
+    if player == "X":
+        opposite = "O"
     if difficulty:
-        choice = check_tic_tac("O")  # Play aggressive to if computer can win
+        choice = check_tic_tac(player)  # Play aggressive to if computer can win
         if choice is None:
-            choice = check_tic_tac("X")  # play defensively if there is no way to win
+            choice = check_tic_tac(opposite)  # play defensively if there is no way to win
         if choice is None:
-            if len(center_avail_positions) > 0:  # if there is no danger to lose in the next round first priority random center choice and then corner
-                choice = random.choice(list(center_avail_positions))
-            else:
+            if board[1][1] == " ":
+                choice = (1, 1)
+            elif len(
+                    corners_avail_positions) > 0:  # if there is no danger to lose in the next round first priority random center choice and then corner
                 choice = random.choice(list(corners_avail_positions))
+            else:
+                choice = random.choice(list(center_avail_positions))
     else:
         choice = random.choice(list(available_positions))
-    board[choice[0]][choice[1]] = "O"
+    board[choice[0]][choice[1]] = player
     available_positions.remove(choice)
 
 
@@ -153,20 +158,24 @@ def main():
     turn_player = player1
     hard_level = True
     for turn_round in range(9):
-        print(f"Γύρος:{turn_round + 1}")
+        print(f"Round:{turn_round + 1}")
         print_board(board)
         if turn_player == player1:
-            player_choice(turn_player)
+            computer_play(hard_level, player1)
         else:
-            computer_play(hard_level)
+            computer_play(hard_level, player2)
         if check_win(turn_player):
-            print(f"Συγχαρητήρια κέρδισε ο παίχτης :{turn_player}")
+            print(f"Congratulation {turn_player} WIN")
             print_board(board)
             break
         turn_player = switch_player(turn_player)
     else:
-        print("Ισοπαλία")
+        print("Draw")
+        draws = +1
         print_board(board)
 
+
+
+main()
 
 main()
