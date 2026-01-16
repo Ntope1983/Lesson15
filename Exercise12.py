@@ -1,8 +1,13 @@
+# Purpose:This Python program is a student and teacher management system.
+# It allows the user to:Add, update, delete, and print student recordsAdd, update, delete, and print teacher records (via mod_teacher.py)
+# Persist data using JSON files (pupils.json and teachers.json)
+# The menu is interactive and provides input validation for names, ages, classes, IDs, etc
 import json
 
 import mod_teacher
 
-students=[]
+students = []
+
 
 def check_student(x, y, z):
     for stud in students:
@@ -135,10 +140,14 @@ def insert_student():
         "idCard": idcard,
         "id": next_id()
     })
+    print(f"Student has been inserted")
+    save_pupils_data()
 
 
 def next_id():
-    return max(student["id"] for student in students) + 1
+    if students:
+        return max(student["id"] for student in students) + 1
+    return 1000  # starting ID
 
 
 def get_valid_input(last_number):
@@ -185,6 +194,7 @@ def update_pupil_by_id(id_update):
         update_student["Class"] = get_class()
     else:
         update_student["idCard"] = get_id_card()
+    save_pupils_data()
     print(f"Student with ID {id_update} has been updated.")
 
 
@@ -192,6 +202,7 @@ def delete_pupil_by_id(pupil_id):
     for student in students:
         if student["id"] == int(pupil_id):
             students.remove(student)
+            save_pupils_data()
             print(f"Student with ID {pupil_id} has been deleted.")
             return
     print(f"Student with ID {pupil_id} not found.")
@@ -225,7 +236,12 @@ def init_pupils_data():
         with open("pupils.json") as f:
             students = json.load(f)
     except FileNotFoundError:
-            print("File not Found")
+        print("File not Found")
+
+
+def save_pupils_data():
+    with open("pupils.json", "w") as f:
+        json.dump(students, f)
 
 
 def main():
@@ -293,6 +309,7 @@ def main():
             print("Exiting program...")
             break
 
+
 init_pupils_data()
 mod_teacher.init_teachers_data()
-#main()
+main()

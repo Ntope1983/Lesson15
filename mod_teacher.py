@@ -6,6 +6,7 @@ teachers = []
 def create_teacher(name, surname):
     if not check_teacher(name, surname):
         teachers.append({"id": next_id(), "first_name": name, "last_name": surname})
+        save_teachers_data()
 
 
 def read_teacher(id_teacher):
@@ -22,6 +23,8 @@ def update_teacher(id_teacher, key, new_value):
     for teacher in teachers:
         if teacher["id"] == id_teacher:
             teacher[key] = new_value
+            print("The update was successfully")
+            save_teachers_data()
             return
     else:
         print("The update_teacher failed. The id doesnt exist")
@@ -32,6 +35,7 @@ def delete_teacher(id_teacher):
         if teacher["id"] == id_teacher:
             teachers.remove(teacher)
             print(f"The teacher with id {id_teacher} deleted successfully")
+            save_teachers_data()
             return
     else:
         print("The Delete_teacher failed. The id doesnt exist")
@@ -47,7 +51,9 @@ def check_teacher(name, lastname):
 
 
 def next_id():
-    return max(teacher["id"] for teacher in teachers) + 1
+    if teachers:
+        return max(teacher["id"] for teacher in teachers) + 1
+    return 1000# starting ID
 
 
 def init_teachers_data():
@@ -57,3 +63,7 @@ def init_teachers_data():
             teachers = json.load(f)
     except FileNotFoundError:
         print("File not Found")
+
+def save_teachers_data():
+    with open("teachers.json","w") as f:
+        json.dump(teachers,f)
